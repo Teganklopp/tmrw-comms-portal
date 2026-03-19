@@ -49,22 +49,20 @@ const INIT_TPS = [
   T("w07a", "0.7a", "One Question Before You Go", "Did we get the timing wrong?", STAGES[0], "Approved", ["Email", "SMS"], "waitlist", "new", "TRIGGER: 24-48hrs after expiry, if still active. Needs timer + condition check."),
   T("w07b", "0.7b", "Reengagement (Lapsed)", "We owe you an update.", STAGES[0], "Approved", ["Email", "SMS"], "waitlist", "new", "TRIGGER: Members silent 3+ months. Needs segment identification in CRM."),
   // Registration - Live
-  T("rc1", "", "Order Confirmation", "", STAGES[1], "Live", ["Email"], null, "live", ""),
-  T("rc2", "", "Post-CKO Welcome (+4h)", "", STAGES[1], "Live", ["Email", "WhatsApp"], null, "live", ""),
-  T("rc3", "", "What You Just Started (+24h)", "", STAGES[1], "Live", ["Email"], null, "live", ""),
-  T("rc4", "", "Cart Abandon Step 1 (+1h)", "", STAGES[1], "Live", ["Email"], null, "live", ""),
-  T("rc5", "", "Cart Abandon Step 2 (+24h)", "", STAGES[1], "Live", ["Email"], null, "live", ""),
+  T("rc1", "", "Order Confirmation", "Your membership is confirmed", STAGES[1], "Live", ["Email"], null, "live", "CRM 1.1"),
+  T("rc3", "", "Cart Abandon 1 Hour", "Your body is already writing tomorrow", STAGES[1], "Live", ["Email"], null, "live", "CRM 1.3"),
+  T("rc4", "", "Cart Abandon 24 Hours", "This is the part where most people bounce", STAGES[1], "Live", ["Email"], null, "live", "CRM 1.4"),
   T("rc6", "", "Cart Abandon (+72h) Social Proof", "", STAGES[1], "Live", ["Email"], null, "live", ""),
   T("rc7", "", "Payment Reminder Sequence", "", STAGES[1], "Live", ["Email", "SMS"], null, "live", ""),
   T("rc8", "", "Payment Failed (+1d)", "", STAGES[1], "Live", ["Email"], null, "live", ""),
   T("rc9", "", "Referral/Advocate Confirmation", "", STAGES[1], "Live", ["Email"], null, "live", ""),
   // Health Story - Live
-  T("hs1", "", "Login Reminder (+24h)", "", STAGES[2], "Live", ["Email", "WhatsApp"], null, "live", ""),
+  T("hs1", "", "Login Reminder (+24h)", "Login to share your Health Story", STAGES[2], "Live", ["Email"], null, "live", "CRM 2.1"),
   T("hs2", "", "First Login Celebration", "", STAGES[2], "Live", ["Email"], null, "live", ""),
-  T("hs3", "", "Login Reminder (+3 days)", "", STAGES[2], "Live", ["Email", "WhatsApp"], null, "live", ""),
+  T("hs3", "", "Login Reminder (+3 days)", "Your TMRW journey is waiting for you", STAGES[2], "Live", ["Email"], null, "live", "CRM 2.3"),
   T("hs4", "", "Collection Day Prep Reminder", "", STAGES[2], "Live", ["SMS"], null, "live", ""),
-  T("hs5", "", "Health Story Incomplete Reminder", "", STAGES[2], "Live", ["Email"], null, "live", ""),
-  T("hs6", "", "HS Complete Confirmation", "", STAGES[2], "Live", ["Email"], null, "live", ""),
+  T("hs5", "", "Health Story Started Not Complete (+48h)", "Complete your Story to unlock your Big Insights", STAGES[2], "Live", ["Email"], null, "live", "CRM 2.4"),
+  T("hs6", "", "Health Story Completed", "Your Story is complete. What happens next.", STAGES[2], "Live", ["Email"], null, "live", "CRM 2.5"),
   T("hs7", "", "Welcome Call Booking (+1d)", "", STAGES[2], "Live", ["Email", "WhatsApp"], null, "live", ""),
   T("hs8", "", "Welcome Call Check-in (+3d)", "", STAGES[2], "Live", ["Email"], null, "live", ""),
   T("hs8b", "", "We're Making Your Goal (+7d)", "", STAGES[2], "Live", ["Email"], null, "live", ""),
@@ -75,13 +73,14 @@ const INIT_TPS = [
   T("hs12", "", "Welcome Call No-Show Follow-up", "", STAGES[2], "Live", ["Email", "WhatsApp"], null, "live", ""),
   T("hs13", "", "Call at TMRW Office", "", STAGES[2], "Live", ["Email"], null, "live", ""),
   // Kit Fulfillment - Live + Blood Test new
-  T("kf1", "", "Kit Shipped - Prep Instructions", "", STAGES[3], "Live", ["Email", "SMS"], null, "live", ""),
+  T("kf1", "", "Kit Shipped + Prep Instructions", "Little Prick Test is on the way", STAGES[3], "Live", ["Email"], null, "live", "CRM 3.1"),
   T("kf2", "", "Kit Delivered Confirmation", "", STAGES[3], "Live", ["Email"], null, "live", ""),
   T("kf3", "", "Sample Treated Content (+3d)", "", STAGES[3], "Live", ["Email"], null, "live", ""),
   T("kf4", "", "Sample Kit Waiting (+7d)", "", STAGES[3], "Live", ["Email", "SMS"], null, "live", ""),
   T("kf5", "", "Sample Not Received (+14d)", "", STAGES[3], "Live", ["Email", "WhatsApp"], null, "live", ""),
   T("kf6", "", "Bloods Ready / Blood Sample Call", "", STAGES[3], "Live", ["Email"], null, "live", ""),
   T("kf7", "", "Kit Hassle / Expired (+14d)", "", STAGES[3], "Live", ["Email"], null, "live", ""),
+  T("kf8", "", "QC Pass + Coach Assigned", "Sample collected and on its way to our lab", STAGES[3], "Live", ["Email"], null, "live", "CRM 3.5"),
   T("bt1", "BT-1", "Requisition Sent", "Your blood test requisition is ready", STAGES[3], "Approved", ["Email", "SMS", "Slack"], "blood-test", "new", "TRIGGER: VA moves member to Requisition Sent in pipeline. Pipeline needs building in Attio/CRM."),
   T("bt2", "BT-2", "Blood Test 5-Day Follow-Up", "Have you had your blood test?", STAGES[3], "Approved", ["Email"], "blood-test", "new", "TRIGGER: 5 business day delay after BT-1. Confirm with Kosta: business day delays or 7 calendar days?"),
   T("bt3", "BT-3", "Blood Test Results Received", "Your blood test results are in.", STAGES[3], "Approved", ["Email", "SMS", "Slack"], "blood-test", "new", "TRIGGER: VA uploads to Oracle then moves to Results Received. Two manual actions required."),
@@ -97,12 +96,12 @@ const INIT_TPS = [
   T("dzq1", "QC-1", "QC Fail: Internal", "We need to redo your test.", STAGES[4], "Approved", ["Email", "SMS"], "dead-zone", "new", "TRIGGER: qc_fail_internal event. Needs flag in system."),
   T("dzq2", "QC-2", "QC Fail: Lab", "Something went wrong on our end.", STAGES[4], "Approved", ["Email", "SMS", "Call"], "dead-zone", "new", "TRIGGER: qc_fail_lab event. Needs flag in system + phone call from clinician."),
   // Results - Live + Dashboard Unlock new
-  T("ri1", "", "Insights Call Booking Confirmation", "", STAGES[5], "Live", ["Email"], null, "live", ""),
-  T("ri2", "", "Insights Call Reminder (Day Of)", "", STAGES[5], "Live", ["Email", "SMS"], null, "live", ""),
-  T("ri3", "", "Insights Call Rescheduled", "", STAGES[5], "Live", ["Email"], null, "live", ""),
-  T("ri4", "", "Result Ready When You Are (+1d)", "", STAGES[5], "Live", ["Email", "SMS"], null, "live", ""),
-  T("ri5", "", "Insights Call Offsite", "", STAGES[5], "Live", ["Email"], null, "live", ""),
-  T("ri6", "", "Insights Call Cancellation", "", STAGES[5], "Live", ["Email"], null, "live", ""),
+  T("ri1", "", "Insights Call Booking Confirmation", "Your Better TMRW Plan Call is confirmed", STAGES[5], "Live", ["Email"], null, "live", "CRM 5.1"),
+  T("ri2", "", "Day Before Call Reminder", "Your Better TMRW Plan Call is tomorrow", STAGES[5], "Live", ["Email"], null, "live", "CRM 5.2"),
+  T("ri3", "", "Day Of Call Reminder", "Your Better TMRW Plan Call is today", STAGES[5], "Live", ["Email", "SMS"], null, "live", "CRM 5.3"),
+  T("ri4", "", "Call Rescheduled", "Your Better TMRW Plan Call has been rescheduled", STAGES[5], "Live", ["Email"], null, "live", "CRM 5.4"),
+  T("ri5", "", "Call Cancelled", "Your Better TMRW Plan Call has been cancelled", STAGES[5], "Live", ["Email"], null, "live", "CRM 5.5"),
+  T("ri6", "", "Call No Show", "We missed you today", STAGES[5], "Live", ["Email", "SMS"], null, "live", "CRM 5.6"),
   T("ri7", "", "Dashboard Unlocked", "", STAGES[5], "Live", ["Email"], null, "live", ""),
   T("du1", "DU-1", "Dashboard Is Live", "Your TMRW Dashboard is live", STAGES[5], "Blocked", ["Email", "SMS"], "dashboard-unlock", "new", "BLOCKED: Waiting on Membership ID to trigger. Needs Oracle checkbox integration."),
   T("du2", "DU-2", "Nudge: Biological Clocks (+3d)", "Have you seen your biological clocks?", STAGES[5], "Approved", ["Email", "SMS"], "dashboard-unlock", "new", "TRIGGER: 3 days after DU-1. Stop if member replies or books call."),
@@ -112,8 +111,9 @@ const INIT_TPS = [
   T("sc1", "", "Supplement Plan Explained", "", STAGES[6], "Live", ["Email"], null, "live", ""),
   T("sc2", "", "Monthly Fitness Check-in", "", STAGES[6], "Live", ["Email"], null, "live", ""),
   // Ongoing
-  T("oj1", "", "7-Day Post Results Check-in", "", STAGES[7], "Live", ["Email"], null, "live", ""),
+  T("oj1", "", "Post Results Check-in (+7d)", "One week on: how are your results landing?", STAGES[7], "Live", ["Email"], null, "live", "CRM 6.1"),
   // Retention
+  T("oj2", "", "Monthly Clinician Check-in (3-monthly)", "Book your check-in call", STAGES[8], "Live", ["Email"], null, "live", "CRM 6.2"),
   T("ret1", "", "NPS Survey", "", STAGES[8], "Live", ["Email"], null, "live", ""),
   // Adherence - Live
   T("sa1", "", "Daily Sachet Delivered", "", STAGES[9], "Live", ["Email"], null, "live", ""),
@@ -125,7 +125,8 @@ const INIT_TPS = [
   T("sa7", "", "Update Call Day Of Reminder", "", STAGES[9], "Live", ["Email", "SMS"], null, "live", ""),
   T("sa8", "", "Update Call No-Show", "", STAGES[9], "Live", ["Email", "WhatsApp"], null, "live", ""),
   // Retest - Live
-  T("rt1", "", "Retest Preparation", "", STAGES[10], "Live", ["Email"], null, "live", ""),
+  T("rt1", "", "Retest Preparation", "Time for your little prick re-test", STAGES[10], "Live", ["Email"], null, "live", "CRM 7.1"),
+  T("rt1b", "", "Updated Health Story Call", "Time for a Check-In", STAGES[10], "Live", ["Email"], null, "live", "CRM 7.2"),
   T("rt2", "", "Retest Kit Shipped", "", STAGES[10], "Live", ["Email"], null, "live", ""),
   T("rt3", "", "Retest Kit Delivered", "", STAGES[10], "Live", ["Email"], null, "live", ""),
   T("rt4", "", "Retest Kit Registered", "", STAGES[10], "Live", ["Email"], null, "live", ""),
@@ -244,7 +245,7 @@ const EMAIL_CONTENT = {
   "re2b": { subject: "Your TMRW spot is ready", preview: "It's been a while. Here's what we've been building.", from: "Mark Britt, CEO", body: "Seg 2 waitlist, never received original 25% code. No mention of upgrade. Same as 1B. 'Your code WELCOMEBACK gives you 50% off.' 48hr window." },
 };
 
-const STORAGE_KEY = "tmrw-portal-v9";
+const STORAGE_KEY = "tmrw-portal-v10c";
 
 const EMAIL_DOCS = [
   { flow: "Waitlist Funnel", file: "Waitlist_Pre-Registration.docx", emails: [
@@ -316,6 +317,28 @@ const EMAIL_DOCS = [
       body: "Hi {{first_name}},\n\nYou signed up to TMRW a while ago. We sent you a registration code, and the timing wasn't right. But TMRW looks quite different from what you saw, and I thought you should know.\n\n[Same product updates]\n\nWhen you first signed up, your code gave you 25% off. We've restructured our pricing since then, and your code has been upgraded to 50%.\n\nUse code WELCOMEBACK to register at $249.50 to join and $124.50 a month for your first three months.\n\nActive for the next 48 hours. No lock-in.\n\nMark Britt\nCEO, TMRW" },
     { id: "2B", title: "Seg 2 - Waitlist, Upgraded (never saw 25%)", subject: "Your TMRW spot is ready", preview: "It's been a while. Here's what we've been building.", from: "Mark Britt, CEO", channels: "Email",
       body: "Hi {{first_name}},\n\n[Same as 1B — no mention of upgrade since they never received the original 25% code]\n\nYour code WELCOMEBACK gives you 50% off, that's $249.50 to join and $124.50 a month for your first three months.\n\nYour spot is held for 48 hours. No lock-in.\n\nMark Britt\nCEO, TMRW" },
+  ]},
+  { flow: "CRM Journey (Live)", file: "TMRW_CRM_Journey_Framework.docx", emails: [
+    { id: "crm-1.1", title: "Order Confirmation", subject: "Your membership is confirmed and your Little Prick Test is on its way", preview: "Here's what happens next.", from: "The TMRW Team", channels: "Email",
+      body: "Big moment! You've joined a new kind of health journey, built to help you live better for longer.\n\nYour membership's now active and your Little Prick Test is on its way. It will ship within 48 business hours and you'll get the tracking info the moment it escapes the building. Inside that small box is the first clue to what's really going on in your body.\n\nHere's how the next chapter unfolds:\n1. Start by completing your Health Story. It's the part where you tell us the things your cells can't. Biology gives us the 'what', and you give us the 'why'.\n2. The Little Prick Test (your epigenetic test) will arrive. In it, you'll find everything you need to collect your sample.\n3. You'll receive your results as well as your personalised Better TMRW Plan and full dashboard access." },
+    { id: "crm-1.3", title: "Cart Abandon 1 Hour", subject: "Your body is already writing tomorrow", preview: "You were just one step away from starting your transformation.", from: "The TMRW Team", channels: "Email",
+      body: "You started building something most people never get - a personalised health journey built on real data, not guesswork.\n\nRight now your order is incomplete. That means your Little Prick Test hasn't been sent, and the big insights that might change your life are waiting." },
+    { id: "crm-1.4", title: "Cart Abandon 24 Hours", subject: "This is the part where most people bounce", preview: "But you're not most people. So here's one last nudge.", from: "The TMRW Team", channels: "Email",
+      body: "Let's be real. This is usually the point where people disappear. Tab left open. Life gets in the way. But that's not why you clicked in, is it?\n\nThe Better TMRW Plan we build is one of the most personalised, science-backed health tools out there.\n\nThis is your reminder to complete your order and claim your place." },
+    { id: "crm-2.1", title: "Login Reminder (+24h)", subject: "Login to share your Health Story & Get Started", preview: "This is where your journey really begins.", from: "The TMRW Team", channels: "Email",
+      body: "Your TMRW login is ready, and your first steps are waiting.\n\nHere's what to do next:\n1. Log in and explore your TMRW onboarding plan\n2. Complete Your Health Story - it unlocks everything that follows\n\nYour Health Story is more than a form. It's the lens that brings your biology into focus." },
+    { id: "crm-2.4", title: "Health Story Started Not Complete", subject: "Complete your Story to unlock your Big Insights", preview: "You're so close to starting your transformation.", from: "The TMRW Team", channels: "Email",
+      body: "You're so close to seeing the biggest picture of your health you've ever had.\n\nYou've logged in and already made a start, which is great. But you haven't completed Your Health Story yet. This is what unlocks everything else.\n\nThis takes about 20-30 minutes and unlocks your entire TMRW Journey." },
+    { id: "crm-2.5", title: "Health Story Completed", subject: "Your Story is complete. What happens next.", preview: "Thank you for sharing your story with us.", from: "The TMRW Team", channels: "Email",
+      body: "Your Health Story is complete. Thank you for sharing your background, concerns, and goals with us.\n\nYour TMRW team is now reviewing everything you've shared. Once we have your Little Prick Test results back, your health coach and integrative clinician will undertake a comprehensive analysis." },
+    { id: "crm-3.1", title: "Kit Shipped + Prep", subject: "Little Prick Test is on the way + preparation", preview: "This marks the start of unlocking the deepest intelligence your body holds.", from: "The TMRW Team", channels: "Email",
+      body: "Your Little Prick Test is now on its way (1-3 business days).\n\nHow to prepare:\n- Drink plenty of water the day before\n- Fast for 8 hours before collection (water fine)\n- Collect within 2 hours of waking\n\nWhen it arrives:\n1. Register your kit\n2. Watch the video guide\n3. Follow instructions, let card dry before sealing\n4. Drop off within 48 hours at any post office" },
+    { id: "crm-5.1", title: "Insights Call Booked", subject: "Your Better TMRW Plan Call is confirmed", preview: "Looking forward to sharing your Big Insights.", from: "The TMRW Team", channels: "Email",
+      body: "Your Better TMRW Plan Call with {{coach_name}} is confirmed!\n\nCall Details: Date, Time, 60 minutes, Join link\n\nWhat we'll cover: Comprehensive review of Body Signals, current health status, personalised recommendations, your Better TMRW Plan roadmap, timeline and next steps.\n\nHow to prepare: Find a quiet space, have a notepad ready, prepare questions, review your Health Story goals." },
+    { id: "crm-6.1", title: "Post Results Check-in (+7d)", subject: "One week on: how are your results landing?", preview: "", from: "The TMRW Team", channels: "Email",
+      body: "It's been about a week since your results and dashboard were shared with you, so we just wanted to gently check in.\n\nReceiving personalised health insights can bring up a mix of emotions - curiosity, clarity, relief, or even a few questions. However you're feeling right now is completely okay.\n\nYou don't need to have everything figured out. This is a journey, and we're here to support you every step of the way." },
+    { id: "crm-7.1", title: "Retest Preparation", subject: "Time for your little prick re-test", preview: "", from: "The TMRW Team", channels: "Email",
+      body: "You're coming up to an important milestone in your TMRW journey. It's now time to reflect on the last 6 months and complete your next little prick re-test.\n\nThis isn't just a re-test. It's seeing how far you have come.\n\nWhat happens next:\n- Your new test kit will be prepared soon\n- You'll receive a tracking link once it ships\n- Complete the test the same way as last time\n- You won't need to register this kit" },
   ]},
   { flow: "Pods Broadcast", file: "Precision_Pods_in_Your_Shop.docx", emails: [
     { id: "BC", title: "Precision Pods in Your Shop", subject: "We built something for you.", preview: "Precision Pods are now available in Your Shop.", from: "Mark Britt, CEO", channels: "Email + SMS",
